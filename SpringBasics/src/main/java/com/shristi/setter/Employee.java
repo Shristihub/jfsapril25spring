@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class Employee {
 	private String employeeName;
 	private double salary;
-	private Address address;
+	private Address address; 
 	
 	
 	public String getEmployeeName() {
