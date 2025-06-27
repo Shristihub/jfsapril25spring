@@ -1,15 +1,13 @@
 package com.example;
 
-import java.util.Arrays;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
 
-import com.example.autowire.IShape;
 import com.example.autowire.ShapeFactory;
+import com.example.javabased.Student;
+import com.example.javabased1.MailSender;
 import com.shristi.setter.Employee;
 
 @SpringBootApplication(scanBasePackages = {"com.shristi","com.example"})
@@ -24,6 +22,12 @@ public class SpringBootBasicApplication implements CommandLineRunner{
 	
 	@Autowired
 	private Employee employee;
+	
+	@Autowired
+	private Student student;
+	
+	@Autowired
+	private MailSender mailSender;
 	
 	private ShapeFactory factory;
 	@Autowired
@@ -41,9 +45,10 @@ public class SpringBootBasicApplication implements CommandLineRunner{
 //		  .forEach(bean->System.out.println(bean));
 //		
 		System.out.println(employee);
-		
 		factory.printArea(20, 30);
+		System.out.println(student);
 		
+		mailSender.showMessage();
 	}
 
 }
