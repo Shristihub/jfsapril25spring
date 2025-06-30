@@ -31,8 +31,7 @@ public class AppConfig {
 	@Bean
 	EmailMessenger emailMessenger() {
 		return new EmailMessenger();
-	}
-	
+	}	
 	@Bean
 	@Primary
 	WhatsAppMessenger whatsapp() {
