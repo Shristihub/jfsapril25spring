@@ -37,7 +37,7 @@ public class SpringOnetooneJpaApplication implements CommandLineRunner{
 		System.out.println();
 		
 		System.out.println("Get By State");
-		studentService.getByState("KAR").forEach(student-> System.out.println(student.getAddressDto()));
+		studentService.getByState("KAR").forEach(student-> System.out.println(student.getAddress()));
 		System.out.println();
 		
 	}

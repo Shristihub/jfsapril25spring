@@ -62,12 +62,11 @@ public class StudentServiceImpl implements IStudentService{
 	@Override
 	public List<StudentDto> getByCity(String city) {
 		List<Student> students =  studentRepository.findByAddressCity(city);
-		return students.stream()
-				.map(student->{
-					System.out.println(student);
-					return mapper.map(student, StudentDto.class);	
-				})
+		List<StudentDto> stdtos =  students.stream()
+				.map(student->mapper.map(student, StudentDto.class))
 				.toList();
+		System.out.println(stdtos);
+		return stdtos;
 	}
 
 	@Override

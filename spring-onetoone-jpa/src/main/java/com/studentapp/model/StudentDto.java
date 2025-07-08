@@ -13,5 +13,5 @@ public class StudentDto {
 	private String studentName;
 	private Integer studentId;
 	private String department;
-	private AddressDto addressDto;
+	private AddressDto address;
 }
