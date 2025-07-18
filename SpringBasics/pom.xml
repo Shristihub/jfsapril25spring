@@ -3,7 +3,9 @@
   <groupId>com.spring.dist</groupId>
   <artifactId>SpringBasics</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  
   <dependencies>
+  
   <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
 <dependency>
     <groupId>org.springframework</groupId>
