@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.productapp.exceptions.ProductNotFoundException;
 import com.productapp.model.Product;
@@ -73,20 +74,38 @@ public class ProductServiceImpl implements IProductService {
 
 	@Override
 	public List<ProductDto> getByBrand(String brand) throws ProductNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Product> products = productRepository.findByBrand(brand);
+		if(products.isEmpty())
+			throw new ProductNotFoundException("product with this brand not available");
+		return products.stream().map(product -> mapper.map(product, ProductDto.class))
+						 .sorted((p1,p2)->p1.getProductName().compareTo(p2.getProductName()))
+				         .collect(Collectors.toList());
 	}
 
 	@Override
 	public List<ProductDto> getByCategory(String category) throws ProductNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Product> products = productRepository.findByCategory(category);
+		if(products.isEmpty())
+			throw new ProductNotFoundException("product with this category not available");
+		return products.stream().map(product -> mapper.map(product, ProductDto.class))
+						 .sorted((p1,p2)->p1.getProductName().compareTo(p2.getProductName()))
+				         .collect(Collectors.toList());
 	}
 
 	@Override
 	public List<ProductDto> getByCatLessPrice(String category, double price) throws ProductNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Product> products = productRepository.findByCategoryPrice(category,price);
+		if(products.isEmpty())
+			throw new ProductNotFoundException("product with this category and less price not available");
+		return products.stream().map(product -> mapper.map(product, ProductDto.class))
+						 .sorted((p1,p2)->p1.getProductName().compareTo(p2.getProductName()))
+				         .collect(Collectors.toList());
+	}
+
+	@Override
+	@Transactional
+	public void updateProductPrice(int productId, double price) {
+		productRepository.updateProduct(productId, price);
 	}
 
 }

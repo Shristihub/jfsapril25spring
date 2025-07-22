@@ -42,15 +42,15 @@ public class Product {
 	@JoinColumn(name = "features_id")
 	private Features features;
 	
-	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
 	@JoinColumn(name="product_id") // foreign key in offers table
 	private List<Offers> offers;
 	
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.MERGE})
 	@JoinColumn(name = "brand_id")
 	private Brand brand;
 	
-	@ManyToMany
+	@ManyToMany(cascade = {CascadeType.MERGE})
 	@JoinTable(name="product_category",
 	        joinColumns = @JoinColumn(name="product_id"),
 	        inverseJoinColumns = @JoinColumn(name="category_id"))

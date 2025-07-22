@@ -33,6 +33,7 @@ public class Employee {
 	@GeneratedValue(generator = "employee_gen",strategy = GenerationType.AUTO)
 	@SequenceGenerator(name = "employee_gen",sequenceName = "employee_seq",initialValue = 1)
 	private Integer employeeId;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="address_id") //added to employee table
 	private Address address;

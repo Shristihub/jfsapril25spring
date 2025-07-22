@@ -19,6 +19,8 @@ public interface IProductService {
 	List<ProductDto> getByCategory(String category)throws ProductNotFoundException;
 	List<ProductDto> getByCatLessPrice(String category,double price)throws ProductNotFoundException;
 
+	//native query 
+	void updateProductPrice(int productId,double price);
 }
 
 

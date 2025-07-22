@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.productapp.model.ProductDto;
+import com.productapp.model.ProductPriceDto;
 import com.productapp.service.IProductService;
 
 @RestController
@@ -41,6 +43,15 @@ public class ProductController {
 			headers.add("info","updating one product");
 			headers.add("desc", "update method called");
 			return ResponseEntity.status(HttpStatus.ACCEPTED).headers(headers).build();
+		}
+	    
+//		http://localhost:8081/product-api/v1/products
+	    @PatchMapping("/products/newprice")
+		ResponseEntity<Void> updateProductPrice(@RequestBody ProductPriceDto productPriceDto){
+	    	double price = productPriceDto.getPrice();
+	    	int productId = productPriceDto.getProductId();
+			productService.updateProductPrice(productId, price);
+			return ResponseEntity.status(HttpStatus.ACCEPTED).build();
 		}
 	    
 //	    http://localhost:8081/product-api/v1/products/productId/2
@@ -71,7 +82,7 @@ public class ProductController {
 		}
 		
 //		 http://localhost:8081/product-api/v1/products/brand/Samsung
-		@GetMapping("/products/brand/{brand}")
+		@GetMapping("/products/brand/{brandName}")
 		ResponseEntity<List<ProductDto>> getByBrand(@PathVariable String brand){
 			List<ProductDto> productDtos = productService.getByBrand(brand);
 	    	HttpHeaders headers =  new HttpHeaders();
@@ -96,5 +107,7 @@ public class ProductController {
 			return ResponseEntity.ok().headers(headers).body(productDtos);
 		}
 
+		
+		
 
 }
