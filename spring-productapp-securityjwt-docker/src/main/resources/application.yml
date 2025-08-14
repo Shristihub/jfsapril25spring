@@ -1,0 +1,16 @@
+server:
+  port: 8081
+jwt:
+  secret: shristi		
+#datasource specific properties
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://mysqlcontainer:3306/jfsaprdb
+#jpa properties
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
